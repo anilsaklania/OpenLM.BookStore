@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenML.BookWebAPI", "OpenML.BookWebAPI.csproj", "{780D3BE3-1203-4AE9-BCB0-253A20E3ECF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{780D3BE3-1203-4AE9-BCB0-253A20E3ECF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{780D3BE3-1203-4AE9-BCB0-253A20E3ECF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780D3BE3-1203-4AE9-BCB0-253A20E3ECF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{780D3BE3-1203-4AE9-BCB0-253A20E3ECF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7765264B-A019-47EB-B33C-DC118583AA98}
+	EndGlobalSection
+EndGlobal
