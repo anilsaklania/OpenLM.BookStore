@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoWrapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using OpenML.BookStore.Application;
+using OpenML.BookStore.Application.Interfaces;
 using OpenML.BookStore.Infrastructure;
 using OpenML.BookStore.Infrastructure.Data;
 
@@ -33,9 +37,11 @@ namespace OpenLM.BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication(Configuration);
-            services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BookStoreDB")));
-            //services.AddInfrastructure(Configuration, Environment);
-            services.AddMvc();
+            services.AddInfrastructure(Configuration, Environment);
+            services.AddControllersWithViews()
+               .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)
+               .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IUnitOfWork>());
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -57,6 +63,7 @@ namespace OpenLM.BookStore
                     }
                 });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,17 +72,26 @@ namespace OpenLM.BookStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OpenLMBookStore.API V1"));
             }
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "OpenLM Book Store API V1"); });
             app.UseHttpsRedirection();
-            
+            //app.RegisterCustomExceptionHandler();
+            app.UseApiResponseAndExceptionWrapper();
+            app.UseRouting();
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

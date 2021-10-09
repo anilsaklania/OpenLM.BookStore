@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OpenML.BookStore.Application.Authors.Command;
+using OpenML.BookStore.Application.Authors.ViewModel;
 
 namespace OpenLM.BookStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class AuthorController : ControllerBase
     {
+        private readonly IMediator _mediator;
+        public AuthorController(IMediator mediator)
+        {
+            this._mediator = mediator;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -23,11 +31,15 @@ namespace OpenLM.BookStore.Controllers
         {
             return "value";
         }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        /// <summary>
+        /// Api Post Request to create authors
+        /// </summary>
+        /// <param name="authorViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("CreateAuthor")]
+        public async Task<IActionResult> InsertAuthor(AuthorViewModel authorViewModel)
         {
+            return Ok(await _mediator.Send(new CreateAuthorCommand() { authorViewModel = authorViewModel }));
         }
 
         // PUT api/values/5

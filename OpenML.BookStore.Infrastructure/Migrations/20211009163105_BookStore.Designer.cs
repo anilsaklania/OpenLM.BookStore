@@ -10,7 +10,7 @@ using OpenML.BookStore.Infrastructure.Data;
 namespace OpenML.BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20211009150906_BookStore")]
+    [Migration("20211009163105_BookStore")]
     partial class BookStore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

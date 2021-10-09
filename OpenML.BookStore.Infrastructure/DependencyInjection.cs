@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OpenML.BookStore.Application.Interfaces;
 using OpenML.BookStore.Infrastructure.Data;
+using OpenML.BookStore.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +18,7 @@ namespace OpenML.BookStore.Infrastructure
             services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(configuration.GetConnectionString("BookStoreDB")));
 
 
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddTransient<IEmailSender, NotificationService>();
             //services.AddTransient<IDocuSignService, DocuSignService>();
             //services.AddTransient<IRegisterHangfireService, RegisterHangfireService>();
@@ -24,10 +26,7 @@ namespace OpenML.BookStore.Infrastructure
             //services.AddTransient<ISpreadSheetService, SpreadSheetService>();
             //services.AddTransient<ILdapService, LdapService>();
             //services.AddTransient<IWordDocumentUtility, WordDocumentUtility>();
-
-            //services.AddTransient<IAdo, AdoRepository>();
-
-            return services;
+                                   return services;
         }
     }
 }
