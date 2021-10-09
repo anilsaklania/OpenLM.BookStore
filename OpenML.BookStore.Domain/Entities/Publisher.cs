@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OpenML.BookStore.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OpenML.BookStore.Domain.Entities
 {
-    public class Publisher
+    public class Publisher: AuditableEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

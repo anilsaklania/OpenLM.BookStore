@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OpenML.BookStore.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OpenML.BookStore.Domain.Entities
 {
-   public class Customer
+   public class Customer: AuditableEntity
     {
         public int CustomerId { get; set; }
         public string Email { get; set; }

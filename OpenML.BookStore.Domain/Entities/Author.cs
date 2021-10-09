@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenML.BookStore.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenML.BookStore.Domain.Entities
 {
-    public class Author
+    public class Author: AuditableEntity
     {
         public int ID { get; set; }
         public string Name { get; set; }
