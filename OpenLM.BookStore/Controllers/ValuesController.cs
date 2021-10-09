@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OpenML.BookWebAPI.Controllers
+namespace OpenLM.BookStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

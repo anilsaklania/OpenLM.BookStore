@@ -4,8 +4,8 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:50642",
-      "sslPort": 44361
+      "applicationUrl": "http://localhost:50963",
+      "sslPort": 44329
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "OpenML.BookWebAPI": {
+    "OpenLM.BookStore": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",
