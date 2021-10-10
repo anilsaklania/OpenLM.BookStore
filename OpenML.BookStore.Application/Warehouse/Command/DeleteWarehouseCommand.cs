@@ -9,28 +9,28 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenML.BookStore.Application.Authors.Command
+namespace OpenML.BookStore.Application.Warehouses.Command
 {
-    public class DeleteAuthorCommand : IRequest<bool>
+    public class DeleteWarehouseCommand : IRequest<bool>
     {
         public int Id { get; set; }
-        public class DeleteAuthorJobHandler : IRequestHandler<DeleteAuthorCommand, bool>
+        public class DeleteWarehouseJobHandler : IRequestHandler<DeleteWarehouseCommand, bool>
         {
             private readonly IUnitOfWork _unitOfWork;
             private readonly IConfiguration _configuration;
-            public DeleteAuthorJobHandler(IConfiguration configuration, IUnitOfWork unitOfWork)
+            public DeleteWarehouseJobHandler(IConfiguration configuration, IUnitOfWork unitOfWork)
             {
                 _unitOfWork = unitOfWork;
                 _configuration = configuration;
             }
 
-            public async Task<bool> Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(DeleteWarehouseCommand request, CancellationToken cancellationToken)
             {
                 bool response = false;
-                var objAuthor = _unitOfWork.Query<Author>().FirstOrDefault(x => x.ID == request.Id);
-                if (objAuthor != null)
+                var objwhouse = _unitOfWork.Query<Warehouse>().FirstOrDefault(x => x.WareHouseId == request.Id);
+                if (objwhouse != null)
                 {                    
-                    _unitOfWork.Remove(objAuthor);
+                    _unitOfWork.Remove(objwhouse);
                     response = true;
                 }
                 await _unitOfWork.CommitAsync(cancellationToken).ConfigureAwait(true);

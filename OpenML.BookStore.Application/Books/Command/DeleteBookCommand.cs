@@ -31,6 +31,7 @@ namespace OpenML.BookStore.Application.Books.Command
                 if (objBook != null)
                 {                    
                     _unitOfWork.Remove(objBook);
+                    response = true;
                 }
                 await _unitOfWork.CommitAsync(cancellationToken).ConfigureAwait(true);
                 return response;
