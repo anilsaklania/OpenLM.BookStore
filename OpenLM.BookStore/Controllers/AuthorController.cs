@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using OpenML.BookStore.Application.Authors.Command;
 using OpenML.BookStore.Application.Authors.Queries;
 using OpenML.BookStore.Application.Authors.ViewModel;
@@ -15,9 +16,11 @@ namespace OpenLM.BookStore.Controllers
     public class AuthorController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public AuthorController(IMediator mediator)
+        private readonly ILogger _logger;
+        public AuthorController(IMediator mediator, ILogger logger)
         {
             this._mediator = mediator;
+            this._logger = logger;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -38,12 +41,32 @@ namespace OpenLM.BookStore.Controllers
         [HttpPost("CreateAuthor")]
         public async Task<IActionResult> InsertAuthor(AuthorViewModel authorViewModel)
         {
+            if (authorViewModel == null)
+            {
+                _logger.LogError("Author object sent from client is null.");
+                return BadRequest("Author object is null");
+            }
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid author object sent from client.");
+                return BadRequest("Invalid model object");
+            }
             return Ok(await _mediator.Send(new CreateAuthorCommand() { authorViewModel = authorViewModel }));
         }
 
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateAuthor(int id, [FromBody]AuthorViewModel authorViewModel)
         {
+            if (authorViewModel == null)
+            {
+                _logger.LogError("Author object sent from client is null.");
+                return BadRequest("Author object is null");
+            }
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid author object sent from client.");
+                return BadRequest("Invalid model object");
+            }
             return Ok(await _mediator.Send(new UpdateAuthorCommand() { authorViewModel = authorViewModel, Id = id }));
         }
 

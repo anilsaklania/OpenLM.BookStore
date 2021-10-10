@@ -17,7 +17,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using OpenML.BookStore.Application;
+using OpenML.BookStore.Application.Authors.ViewModel;
+using OpenML.BookStore.Application.Books.ViewModel;
+using OpenML.BookStore.Application.Customers.ViewModel;
 using OpenML.BookStore.Application.Interfaces;
+using OpenML.BookStore.Application.Publishers.ViewModel;
+using OpenML.BookStore.Application.Warehouses.ViewModel;
+using OpenML.BookStore.Domain.Entities;
 using OpenML.BookStore.Infrastructure;
 using OpenML.BookStore.Infrastructure.Data;
 
@@ -38,9 +44,23 @@ namespace OpenLM.BookStore
         {
             services.AddApplication(Configuration);
             services.AddInfrastructure(Configuration, Environment);
-            services.AddControllersWithViews()
+            services.AddLogging(config =>
+            {
+                config.AddConfiguration(this.Configuration.GetSection("Logging"));
+                config.AddDebug();
+                config.AddEventSourceLogger();
+            });
+            services.AddControllers()
                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)
-               .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IUnitOfWork>());
+               .AddFluentValidation(fv =>
+               {
+                   fv.RegisterValidatorsFromAssemblyContaining<AuthorValidator>();
+                   fv.RegisterValidatorsFromAssemblyContaining<BookValidator>();
+                   fv.RegisterValidatorsFromAssemblyContaining<CustomerValidator>();
+                   fv.RegisterValidatorsFromAssemblyContaining<PublisherValidator>();
+                   fv.RegisterValidatorsFromAssemblyContaining<WareHouseValidator>();
+                   fv.ImplicitlyValidateRootCollectionElements = true;
+               });
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerGen(c =>
             {
@@ -67,8 +87,9 @@ namespace OpenLM.BookStore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile(string.Format("Logs/mylog-{0}.txt", DateTime.Now.ToShortDateString()));
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

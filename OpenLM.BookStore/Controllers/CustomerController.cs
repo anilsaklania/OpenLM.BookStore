@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using OpenML.BookStore.Application.Customers.Command;
 using OpenML.BookStore.Application.Customers.Queries;
 using OpenML.BookStore.Application.Customers.ViewModel;
@@ -15,9 +16,11 @@ namespace OpenLM.BookStore.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public CustomerController(IMediator mediator)
+        private readonly ILogger _logger;
+        public CustomerController(IMediator mediator, ILogger logger)
         {
             this._mediator = mediator;
+            this._logger = logger;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -38,6 +41,16 @@ namespace OpenLM.BookStore.Controllers
         [HttpPost("CreateCustomer")]
         public async Task<IActionResult> InsertCustomer(CustomerViewModel pubViewModel)
         {
+            if (pubViewModel == null)
+            {
+                _logger.LogError("Publisher object sent from client is null.");
+                return BadRequest("Publisher object is null");
+            }
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid publisher object sent from client.");
+                return BadRequest("Invalid model object");
+            }
             return Ok(await _mediator.Send(new CreateCustomerCommand() {  custViewModel = pubViewModel }));
         }
 
