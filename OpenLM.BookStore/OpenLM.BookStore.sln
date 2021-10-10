@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLM.BookStoreApi", "OpenLM.BookStoreApi.csproj", "{AF8DB2C0-C2C9-4471-BC03-E2714EFCAA46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenLM.BookStoreApi", "OpenLM.BookStoreApi.csproj", "{AF8DB2C0-C2C9-4471-BC03-E2714EFCAA46}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A50D75E2-907D-4F4C-9B1E-0650341C2683}"
 EndProject
@@ -15,11 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{69319AB5-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{837631B1-8846-4DD5-ADC3-07B68F624850}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenML.BookStore.Application", "..\OpenML.BookStore.Application\OpenML.BookStore.Application.csproj", "{419FC883-EFD9-4593-B5AC-ACC9AA745095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenML.BookStore.Application", "..\OpenML.BookStore.Application\OpenML.BookStore.Application.csproj", "{419FC883-EFD9-4593-B5AC-ACC9AA745095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenML.BookStore.Domain", "..\OpenML.BookStore.Domain\OpenML.BookStore.Domain.csproj", "{0C72A5C5-6E5B-4AA3-9D5A-B1527EC6AD32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenML.BookStore.Domain", "..\OpenML.BookStore.Domain\OpenML.BookStore.Domain.csproj", "{0C72A5C5-6E5B-4AA3-9D5A-B1527EC6AD32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenML.BookStore.Infrastructure", "..\OpenML.BookStore.Infrastructure\OpenML.BookStore.Infrastructure.csproj", "{B7B03B5E-48D8-4617-AB9C-D4A83767C095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenML.BookStore.Infrastructure", "..\OpenML.BookStore.Infrastructure\OpenML.BookStore.Infrastructure.csproj", "{B7B03B5E-48D8-4617-AB9C-D4A83767C095}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{92C7CEBB-9825-40C8-844C-DAE3292F2201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLM.TestAPI", "..\OpenLM.TestAPI\OpenLM.TestAPI.csproj", "{B37A0B93-DB50-4891-9045-A65EE25BA152}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,10 @@ Global
 		{B7B03B5E-48D8-4617-AB9C-D4A83767C095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7B03B5E-48D8-4617-AB9C-D4A83767C095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7B03B5E-48D8-4617-AB9C-D4A83767C095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B37A0B93-DB50-4891-9045-A65EE25BA152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37A0B93-DB50-4891-9045-A65EE25BA152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37A0B93-DB50-4891-9045-A65EE25BA152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37A0B93-DB50-4891-9045-A65EE25BA152}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,7 @@ Global
 		{419FC883-EFD9-4593-B5AC-ACC9AA745095} = {69319AB5-5098-4C17-AC29-96E22AA0AB01}
 		{0C72A5C5-6E5B-4AA3-9D5A-B1527EC6AD32} = {69319AB5-5098-4C17-AC29-96E22AA0AB01}
 		{B7B03B5E-48D8-4617-AB9C-D4A83767C095} = {9769CDB2-2DCF-41D4-9EC9-953495D7ED91}
+		{B37A0B93-DB50-4891-9045-A65EE25BA152} = {92C7CEBB-9825-40C8-844C-DAE3292F2201}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {882A5DF3-DF72-4789-B0FD-17A9A5244C5F}
