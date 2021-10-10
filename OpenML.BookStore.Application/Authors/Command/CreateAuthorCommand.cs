@@ -13,11 +13,11 @@ namespace OpenML.BookStore.Application.Authors.Command
     public class CreateAuthorCommand: IRequest<bool>
     {
         public AuthorViewModel authorViewModel { get; set; }
-        public class CreateuthorJobHandler : IRequestHandler<CreateAuthorCommand, bool>
+        public class CreateAuthorJobHandler : IRequestHandler<CreateAuthorCommand, bool>
         {
             private readonly IUnitOfWork _unitOfWork;
             private readonly IConfiguration _configuration;
-            public CreateuthorJobHandler(IConfiguration configuration, IUnitOfWork unitOfWork)
+            public CreateAuthorJobHandler(IConfiguration configuration, IUnitOfWork unitOfWork)
             {
                 _unitOfWork = unitOfWork;
                 _configuration = configuration;
@@ -32,7 +32,7 @@ namespace OpenML.BookStore.Application.Authors.Command
                 objAuthor.PortalURL = request.authorViewModel.PortalURL;
                 objAuthor.Created = DateTime.Now;
                 objAuthor.CreatedBy = "Test";
-                var intake = _unitOfWork.AddObj(objAuthor);
+                 _unitOfWork.AddObj(objAuthor);
                 await _unitOfWork.CommitAsync(cancellationToken).ConfigureAwait(true);
                 return true;
             }

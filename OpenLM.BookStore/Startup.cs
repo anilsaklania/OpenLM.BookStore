@@ -82,7 +82,7 @@ namespace OpenLM.BookStore
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "OpenLM Book Store API V1"); });
             app.UseHttpsRedirection();
             //app.RegisterCustomExceptionHandler();
-            app.UseApiResponseAndExceptionWrapper();
+            //app.UseApiResponseAndExceptionWrapper();
             app.UseRouting();
             app.UseCors(x => x
                 .AllowAnyOrigin()

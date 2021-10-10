@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenML.BookStore.Application.Authors.Command;
+using OpenML.BookStore.Application.Authors.Queries;
 using OpenML.BookStore.Application.Authors.ViewModel;
 
 namespace OpenLM.BookStore.Controllers
@@ -18,18 +19,16 @@ namespace OpenLM.BookStore.Controllers
         {
             this._mediator = mediator;
         }
-        // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _mediator.Send(new GetAuthorQuery() { }));
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await _mediator.Send(new GetAuthorQuery() { Id = id }));
         }
         /// <summary>
         /// Api Post Request to create authors
@@ -42,16 +41,16 @@ namespace OpenLM.BookStore.Controllers
             return Ok(await _mediator.Send(new CreateAuthorCommand() { authorViewModel = authorViewModel }));
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateAuthor(int id, [FromBody]AuthorViewModel authorViewModel)
         {
+            return Ok(await _mediator.Send(new UpdateAuthorCommand() { authorViewModel = authorViewModel, Id = id }));
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteAuthor(int id)
         {
+            return Ok(await _mediator.Send(new DeleteAuthorCommand() { Id = id }));
         }
     }
 }
