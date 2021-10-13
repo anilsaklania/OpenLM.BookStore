@@ -13,20 +13,11 @@ namespace OpenML.BookStore.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(configuration.GetConnectionString("BookStoreDB")));
-
-
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddTransient<IEmailSender, NotificationService>();
-            //services.AddTransient<IDocuSignService, DocuSignService>();
-            //services.AddTransient<IRegisterHangfireService, RegisterHangfireService>();
-            //services.AddTransient<IClearSearchService, ClearSearchService>();
-            //services.AddTransient<ISpreadSheetService, SpreadSheetService>();
-            //services.AddTransient<ILdapService, LdapService>();
-            //services.AddTransient<IWordDocumentUtility, WordDocumentUtility>();
-                                   return services;
+            return services;
         }
     }
 }

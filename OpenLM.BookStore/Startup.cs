@@ -43,7 +43,7 @@ namespace OpenLM.BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication(Configuration);
-            services.AddInfrastructure(Configuration, Environment);
+            services.AddInfrastructure(Configuration);
             services.AddLogging(config =>
             {
                 config.AddConfiguration(this.Configuration.GetSection("Logging"));
